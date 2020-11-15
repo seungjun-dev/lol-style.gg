@@ -1,0 +1,66 @@
+
+.wrap {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    margin:0;
+    background-color: #20639B;
+}
+
+.top-navigation {
+    position: static;
+    width: 100%;
+    height: 5%;
+    background-color: #173F5F;
+}
+
+#title {
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 230%;
+    vertical-align: bottom;
+    padding-left: 1%;
+}
+
+.contents {
+    position: static;
+}
+
+.search-area {
+    position: static;
+}
+
+.search-username {
+    display: block;
+    width: 100%;
+    padding: 15px 150px 18px 17px;
+    background: white;
+    border: none;
+    line-height: 17px;
+    font-size: 14px;
+    color: #9b9b9b;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.info-area {
+    position: static;
+    width: 100%;
+}
+
+.player {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    background-color: #F1D1B5;
+}
+
+.profile {
+    
+}
