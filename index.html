@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>lol-style.gg</title>
-    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
     <script type="text/javascript" src="./js/riot-api.js"></script>
 </head>
+
 <body>
     <div class="wrap">
         <div id="nav" class="top-navigation">
@@ -12,21 +15,22 @@
         </div>
         <div id="contents" class="contents">
             <div class="search-area">
-                <input type="text" id="userName" class="search-username" placeholder="소환사명" onkeypress="javascript:if(event.keyCode == 13){getSummerInfo(); return false;}">
+                <input type="text" id="userName" class="search-username" placeholder="소환사명"
+                    onkeypress="javascript:if(event.keyCode == 13){getSummonerInfo(); return false;}">
             </div>
             <div class="info-area">
                 <div class="player">
                     <div class="profile">
                         <div class="tier-history">
-                            
+
                         </div>
-                        <div class="name">Summer's Name</div>
+                        <div class="name"></div>
                         <div class="solo-tier"></div><!-- Most Played Position / Play style of the position -->
                         <div class="free-tier"></div><!-- Most Played Position / Play style of the position -->
                     </div>
                     <div class="recent-games">
                         <div class="last-games">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -34,4 +38,5 @@
         </div>
     </div>
 </body>
+
 </html>
