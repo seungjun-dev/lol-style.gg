@@ -57,7 +57,13 @@
     top: 15%;
     left: 5%;
     width: 90%;
-    height: 20%;
+    height: 25%;
     background-color: #F1D1B5;
 }
 
+.recent-games {
+    width: 100%;
+    margin-top: 13%;
+    height: 50%;
+    background-color: #F1D1B5;
+}

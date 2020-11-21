@@ -1,63 +1,157 @@
-const API_KEY = "RGAPI-68f5f184-ac86-42c5-be19-a66ea8075840";
+const API_KEY = "RGAPI-fae2427a-a96b-4224-9671-fc455417252a";
 
-function getSummonerInfo() {
+var goContents = {
+    
+    //start baseInfo
+    baseInfo : {
+        id: '',
+        accountId: '',
+        puuid: '',
+        name: '',
+        profileIconId: '',
+        level: ''
+    }//end baseInfo
+    
+    //start leagueInfo
+    , leagueInfo : {
+        //rank - flex
+        flexInfo : {
+            tier: '',
+            rank: '',
+            tierImg: '',
+            leaguePoints: '',
+            wins: '',
+            losses: '',
+            veteran: '',
+            inactive: '',
+            freshBlood: '',
+            hotStreak: ''
+        }
+
+        //rank - solo
+        , soloInfo : {
+            tier: '',
+            rank: '',
+            tierImg: '',
+            leaguePoints: '',
+            wins: '',
+            losses: '',
+            veteran: '',
+            inactive: '',
+            freshBlood: '',
+            hotStreak: ''
+        }
+    }//end leagueInfo
+}
+
+getSummonerInfo = function() {
+    goContents = {};
+
     var name = document.getElementById("userName").value;
-
-    //console.log(name);
-
+    console.log("getSummonerIngo():name -> " + name);
     fetch(
-        //`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/%EC%9F%A4%20%EC%9E%84%EC%8A%A4?api_key=RGAPI-68f5f184-ac86-42c5-be19-a66ea8075840`
         `https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${API_KEY}`
     )
         .then(function (response) {
             return response.json();
         })
         .then(function (json) {
-            /*
-            SUMMONER-V4 
-            json.id:
-            json.accountId:
-            json.puuid:
-            json.name:
-            json.profileIconId:
-            json.revisionDate:
-            json.summonerLevel:
-            */
-            //console.log(json.id);
+            //유저 기본 정보 세팅
+            setBaseInfo(json);
+            
+            console.log("getSummonerIngo():id -> "+json.id);
+            //유저의 리그 정보 가져오기
             getLeagueInfo(json.id);
         });
 }
 
-function getLeagueInfo(id) {
+getLeagueInfo = function(id) {
     var encryptedId = id;
 
     fetch(
-        //`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/9lZSMawwYs8WUyjQUFLlVGWLLrMu598L_RRdniS3tsOXFQ?api_key=RGAPI-68f5f184-ac86-42c5-be19-a66ea8075840`
         `https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${encryptedId}?api_key=${API_KEY}`
     )
         .then(function (response) {
             return response.json();
         })
         .then(function (json) {
-            console.log(json[0].summonerName);
-            /*
-            LEAGUE-V4
-            json[0] -> 자유랭크
-            json[1] -> 솔로랭크
-            json[i].tier;
-            json[i].rank;
-            json[i].leaguePoints;
-            json[i].wins;
-            json[i].losses;
-            json[i].veteran;
-            json[i].inactive;
-            json[i].freshBlood;
-            json[i].hotStreak;
-            */
+            
+            console.log("getLeagueInfo():json[0].summonerName -> "+json[0].summonerName);
+            console.log("getLeagueInfo():json[1].summonerName -> "+json[1].summonerName);
+
+            if(json[0].queueType == "RANKED_SOLO_5x5"){
+                setSoloRankInfo(json[0]);
+                setFlexRankInfo(json[1]);
+            } else {
+                setSoloRankInfo(json[1]);
+                setFlexRankInfo(json[0]);
+            }
+            
+            renderInfo();
         });
 }
 
-function init() {
+setBaseInfo = function(res) {
+    goContents.baseInfo = {
+        id: res.id,
+        accountId: res.accountId,
+        puuid: res.puuid,
+        name: res.name,
+        profileIconId: res.profileIconId,
+        level: res.summonerLevel
+    }
+}
+
+setFlexRankInfo = function(res) {
+    goContents.leagueInfo.flexInfo = {
+        tier: res.tier,
+        rank: res.rank,
+        tierImg: getTierImage(res.tier, res.rank),
+        leaguePoints: res.leaguePoints,
+        wins: res.wins,
+        losses: res.losses,
+        veteran: res.veteran,
+        inactive: res.inactive,
+        freshBlood: res.freshBlood,
+        hotStreak: res.hotStreak
+    }
+}
+
+setSoloRankInfo = function(res) {
+    goContents.leagueInfo.soloInfo = {
+        tier: res.tier,
+        rank: res.rank,
+        tierImg: getTierImage(res.tier, res.rank),
+        leaguePoints: res.leaguePoints,
+        wins: res.wins,
+        losses: res.losses,
+        veteran: res.veteran,
+        inactive: res.inactive,
+        freshBlood: res.freshBlood,
+        hotStreak: res.hotStreak
+    }
+}
+
+getTierImage = function(tier, rank) {
+    var url = "./img/tier-icons/tier-icons/";
+    var tierRank = tier + "_" + rank + ".png";
+
+    url = url + tierRank.toLowerCase();
+    console.log(url);
+
+    return url;
+}
+
+renderInfo = function() {
+    var app = new Vue({
+        el: '#styleInfo',
+        data: goContents
+    })
+    
+    $('#styleInfo').show();
+}
+
+init = function() {
     console.log("riot api start");
 }
 

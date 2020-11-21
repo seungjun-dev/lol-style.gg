@@ -6,6 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/index.css" />
     <script type="text/javascript" src="./js/riot-api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 
 <body>
@@ -15,24 +17,35 @@
         </div>
         <div id="contents" class="contents">
             <div class="search-area">
-                <input type="text" id="userName" class="search-username" placeholder="소환사명"
-                    onkeypress="javascript:if(event.keyCode == 13){getSummonerInfo(); return false;}">
+                <form>
+                    <input type="text" id="userName" class="search-username" placeholder="소환사명"
+                        onkeypress="javascript:if(event.keyCode == 13){getSummonerInfo(); return false;}">
+                </form>
             </div>
-            <div class="info-area">
+            <div id="styleInfo" class="info-area" style="display: none;">
                 <div class="player">
                     <div class="profile">
-                        <div class="tier-history">
-
+                        <!--<div class="tier-history"></div>-->
+                        <div class="profile-left">
+                            <div class="solo-tier"><img v-bind:src="leagueInfo.soloInfo.tierImg" width="12%;"/></div><!-- Most Played Position / Play style of the position -->
+                            <div class="free-tier" style="display: none;"></div><!-- Most Played Position / Play style of the position -->
+                            <div class="name"><span id="summonerName">{{baseInfo.name}}</span></div>
+                            <div class="winLost"><span>{{leagueInfo.soloInfo.wins}} / {{leagueInfo.soloInfo.losses}}</span></div>
                         </div>
-                        <div class="name"></div>
-                        <div class="solo-tier"></div><!-- Most Played Position / Play style of the position -->
-                        <div class="free-tier"></div><!-- Most Played Position / Play style of the position -->
+                        <div class="profile-right">
+                            <div class="position">
+                                <div class="mostPlayed"></div>
+                            </div>
+                            <div class="champion">
+                                <div class="mostPlayed"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="recent-games">
+                    <!--<div class="recent-games">
                         <div class="last-games">
 
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
