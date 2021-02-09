@@ -1,4 +1,4 @@
-const API_KEY = "RGAPI-b5f71831-e364-4695-a84f-cd501a1360a3";
+const API_KEY = "#";
 
 var goContents = {
     
