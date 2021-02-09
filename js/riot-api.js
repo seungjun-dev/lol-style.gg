@@ -1,4 +1,4 @@
-const API_KEY = "RGAPI-fae2427a-a96b-4224-9671-fc455417252a";
+const API_KEY = "RGAPI-b5f71831-e364-4695-a84f-cd501a1360a3";
 
 var goContents = {
     
@@ -14,8 +14,11 @@ var goContents = {
     
     //start leagueInfo
     , leagueInfo : {
+        rankYn: false,
+        flexYn: false,
+        
         //rank - flex
-        flexInfo : {
+        flex : {
             tier: '',
             rank: '',
             tierImg: '',
@@ -29,7 +32,7 @@ var goContents = {
         }
 
         //rank - solo
-        , soloInfo : {
+        , solo : {
             tier: '',
             rank: '',
             tierImg: '',
@@ -45,9 +48,7 @@ var goContents = {
 }
 
 getSummonerInfo = function() {
-    goContents = {};
-
-    var name = document.getElementById("userName").value;
+     var name = document.getElementById("userName").value;
     console.log("getSummonerIngo():name -> " + name);
     fetch(
         `https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${API_KEY}`
@@ -83,8 +84,8 @@ getLeagueInfo = function(id) {
                 setSoloRankInfo(json[0]);
                 setFlexRankInfo(json[1]);
             } else {
-                setSoloRankInfo(json[1]);
                 setFlexRankInfo(json[0]);
+                setSoloRankInfo(json[1]);
             }
             
             renderInfo();
@@ -103,7 +104,7 @@ setBaseInfo = function(res) {
 }
 
 setFlexRankInfo = function(res) {
-    goContents.leagueInfo.flexInfo = {
+    goContents.leagueInfo.flex = {
         tier: res.tier,
         rank: res.rank,
         tierImg: getTierImage(res.tier, res.rank),
@@ -118,7 +119,7 @@ setFlexRankInfo = function(res) {
 }
 
 setSoloRankInfo = function(res) {
-    goContents.leagueInfo.soloInfo = {
+    goContents.leagueInfo.solo = {
         tier: res.tier,
         rank: res.rank,
         tierImg: getTierImage(res.tier, res.rank),
