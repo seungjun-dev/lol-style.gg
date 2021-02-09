@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>lol-style.gg</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <script type="text/javascript" src="./js/riot-api.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="nav" class="top-navigation">
+            <span id="title">lol-style.gg</span>
+        </div>
+        <div id="contents" class="contents">
+            <div class="search-area">
+                <form>
+                    <input type="text" id="userName" class="search-username" placeholder="소환사명"
+                        onkeypress="javascript:if(event.keyCode == 13){getSummonerInfo(); return false;}">
+                </form>
+            </div>
+            <div id="styleInfo" class="info-area" style="display: none;">
+                <div class="player">
+                    <div class="profile">
+                        <!--<div class="tier-history"></div>-->
+                        <div class="profile-left">
+                            <div class="solo-tier"><img class="tierImg" v-bind:src="leagueInfo.solo.tierImg"/></div><!-- Most Played Position / Play style of the position -->
+                            <div class="flex-tier" style="display: none;"><img class="tierImg" v-bind:src="leagueInfo.flex.tierImg"/></div><!-- Most Played Position / Play style of the position -->
+                            <div class="solo-tier">{{leagueInfo.solo.tier}} {{leagueInfo.solo.rank}}</div>
+                            <div class="flex-tier" style="display: none;">{{leagueInfo.flex.tier}} {{leagueInfo.flex.rank}}</div>
+                            <div class="winLost"><span>{{leagueInfo.solo.wins}} / {{leagueInfo.solo.losses}}</span></div>
+                        </div>
+                        <div class="profile-right">
+                            <div class="name"><span id="summonerName">{{baseInfo.name}}</span></div>
+                            <div class="position">
+                                <div class="mostPlayed"></div>
+                            </div>
+                            <div class="champion">
+                                <div class="mostPlayed"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!-- <div class="style">
+                        <div class="summary">
+                            <span class="summary-style">
+                                {{baseInfo.name}}은/는 성장형 정글러입니다.
+                            </span>                            
+                        </div> 
+                    </div>                   -->
+                </div>              
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
